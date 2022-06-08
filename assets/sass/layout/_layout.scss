@@ -1,0 +1,246 @@
+:root {
+  --primary: #212529;
+  --white: #fff;
+  --gray: #2a324b;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  scrollbar-color: transparent transparent;
+  scrollbar-width: 0px;
+}
+*::-webkit-scrollbar {
+  width: 0;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: transparent;
+  border: none;
+}
+
+* {
+  -ms-overflow-style: none;
+}
+/*--------------------------------------------section navbar-----------------------------------------------------*/
+.nav-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  max-height: 50px;
+  &__logo {
+    grid-column: 2 /1;
+    background-color: var(--primary);
+  }
+  &__ul {
+    grid-column: 2 / 2;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: var(--white);
+    background-color: var(--primary);
+  }
+  &__items {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 30px;
+  }
+  &__items a {
+    padding: 0 10px;
+    color: var(--white);
+  }
+}
+.nav-container__logo-img {
+  width: 180px;
+  padding: 10px 30px;
+}
+@media only screen and (max-width: 560px) {
+  .nav-container__items {
+    flex-direction: column;
+  }
+}
+
+/*--------------------------------------------section carousel-----------------------------------------------------*/
+.carousel {
+  grid-column: 1 / 4;
+}
+@keyframes tonext {
+  75% {
+    left: 0;
+  }
+  95% {
+    left: 100%;
+  }
+  98% {
+    left: 100%;
+  }
+  99% {
+    left: 0;
+  }
+}
+
+@keyframes tostart {
+  75% {
+    left: 0;
+  }
+  95% {
+    left: -300%;
+  }
+  98% {
+    left: -300%;
+  }
+  99% {
+    left: 0;
+  }
+}
+
+@keyframes snap {
+  96% {
+    scroll-snap-align: center;
+  }
+  97% {
+    scroll-snap-align: none;
+  }
+  99% {
+    scroll-snap-align: none;
+  }
+  100% {
+    scroll-snap-align: center;
+  }
+}
+
+ol,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.carousel {
+  position: relative;
+  filter: drop-shadow(0 0 10px #0003);
+  perspective: 100px;
+  height: 100vh;
+  &__viewport {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    overflow-x: scroll;
+    counter-reset: item;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+  }
+  &__slide {
+    position: relative;
+    flex: 0 0 100%;
+    width: 100%;
+    counter-increment: item;
+  }
+}
+
+.carousel__slide--img {
+  width: 100%;
+  height: 100vh;
+}
+
+.carousel__slide:before {
+  content: counter(item);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -40%, 70px);
+  color: #fff;
+  font-size: 2em;
+}
+
+.carousel__snapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  scroll-snap-align: center;
+}
+
+@media (hover: hover) {
+  .carousel__snapper {
+    animation-name: tonext, snap;
+    animation-timing-function: ease;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+  }
+
+  .carousel__slide:last-child .carousel__snapper {
+    animation-name: tostart, snap;
+  }
+}
+
+@media only screen and (max-width: 560px) {
+  .carousel {
+    height: 50vh;
+  }
+}
+/*--------------------------------------------section info-----------------------------------------------------*/
+
+.info {
+  grid-column: 1 / 4;
+  text-align: center;
+  height: 220px;
+  padding: 40px;
+  &__title {
+    color: var(--primary);
+    font-size: 40px;
+    padding-bottom: 30px;
+  }
+  &__text {
+    font-size: 18px;
+    padding: 0 20px;
+  }
+}
+@media only screen and (max-width: 560px) {
+  .info {
+    height: 80%;
+  }
+}
+
+/*--------------------------------------------section services-----------------------------------------------------*/
+.services {
+  grid-column: 1 / 4;
+  display: flex;
+  height: 220px;
+  background-color: var(--primary);
+  color: var(--white);
+  text-align: center;
+  padding: 20px 30px;
+  &__info-text {
+    text-align: justify;
+    padding: 20px;
+  }
+}
+@media only screen and (max-width: 560px) {
+  .services {
+    flex-direction: column;
+    height: 100%;
+    padding: 30px;
+  }
+}
+/*--------------------------------------------section footer-----------------------------------------------------*/
+.footer {
+  grid-column: 1 / 4;
+  background-color: var(--white);
+  height: 60px;
+  margin: auto;
+  padding-top: 20px;
+  font-size: large;
+}
+
